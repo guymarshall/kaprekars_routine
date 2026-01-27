@@ -84,8 +84,6 @@ int32_t sort_digits(int32_t input)
 
 int main(void)
 {
-	printf("DIGIT_COUNT: %d, INPUT_NUMBER: %d\n", DIGIT_COUNT, INPUT_NUMBER);
-
 	if (all_digits_same(INPUT_NUMBER))
 	{
 		fprintf(stderr, "Digits cannot all be the same.\n");
@@ -96,6 +94,7 @@ int main(void)
 	const int32_t MAGIC_NUMBER = 6174;
 	int32_t number = INPUT_NUMBER;
 
+	printf("number: %d\n", number);
 	while (number != MAGIC_NUMBER)
 	{
 		int32_t sorted = sort_digits(number);
