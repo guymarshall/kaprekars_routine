@@ -92,28 +92,16 @@ int main(void)
 		return 1;
 	}
 
-	// const int MAGIC_NUMBER = 6174;
-	// int number = INPUT_NUMBER;
+	const int MAGIC_NUMBER = 6174;
+	int number = INPUT_NUMBER;
 
-	// while (number != MAGIC_NUMBER)
-	// {
-	// 	printf("number: %d\n", number);
-	// 	// do logic here
-
-	// 	number--;
-	// }
-
-	int test = 8473;
-	int reversed = reverse_digits(test);
-	int sorted = sort_digits(test);
-
-	printf("test: %d, reversed: %d, sorted: %d\n", test, reversed, sorted);
-
-	// e.g. 9218
-	// sort digits e.g. 9821
-	// then other way around e.g. 1289
-	// take away smaller number from largest
-	// repeat this with result
+	while (number != MAGIC_NUMBER)
+	{
+		int sorted = sort_digits(number);
+		int reversed = reverse_digits(sorted);
+		number = reversed - sorted;
+		printf("number: %d\n", number);
+	}
 
 	return 0;
 }
