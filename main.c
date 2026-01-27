@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
-int digit_count(int input)
+int32_t digit_count(int32_t input)
 {
-	int count = 0;
+	int32_t count = 0;
 
 	while (input > 0)
 	{
@@ -17,9 +18,9 @@ int digit_count(int input)
 #define INPUT_NUMBER 9218
 #define DIGIT_COUNT digit_count(INPUT_NUMBER)
 
-int all_digits_same(int input)
+int32_t all_digits_same(int32_t input)
 {
-	int last = input % 10;
+	int32_t last = input % 10;
 	while (input > 0)
 	{
 		if (input % 10 != last)
@@ -31,9 +32,9 @@ int all_digits_same(int input)
 	return 1;
 }
 
-int reverse_digits(int input)
+int32_t reverse_digits(int32_t input)
 {
-	int reversed = 0;
+	int32_t reversed = 0;
 
 	while (input > 0)
 	{
@@ -44,33 +45,33 @@ int reverse_digits(int input)
 	return reversed;
 }
 
-int sort_digits(int input)
+int32_t sort_digits(int32_t input)
 {
-	int *digits = (int *)malloc(sizeof(*digits) * DIGIT_COUNT);
+	int32_t *digits = (int32_t *)malloc(sizeof(*digits) * DIGIT_COUNT);
 
-	for (int i = 0; i < DIGIT_COUNT; i++)
+	for (int32_t i = 0; i < DIGIT_COUNT; i++)
 	{
 		digits[i] = input % 10;
 		input /= 10;
 	}
 
-	for (int i = 0; i < DIGIT_COUNT - 1; i++)
+	for (int32_t i = 0; i < DIGIT_COUNT - 1; i++)
 	{
-		for (int j = 0; j < DIGIT_COUNT - 1 - i; j++)
+		for (int32_t j = 0; j < DIGIT_COUNT - 1 - i; j++)
 		{
 			if (digits[j] > digits[j + 1])
 			{
-				int temp = digits[j];
+				int32_t temp = digits[j];
 				digits[j] = digits[j + 1];
 				digits[j + 1] = temp;
 			}
 		}
 	}
 
-	int sorted_number = 0;
+	int32_t sorted_number = 0;
 
-	int multiplier = 1;
-	for (int i = DIGIT_COUNT - 1; i >= 0; i--)
+	int32_t multiplier = 1;
+	for (int32_t i = DIGIT_COUNT - 1; i >= 0; i--)
 	{
 		sorted_number += (digits[i] * multiplier);
 		multiplier *= 10;
@@ -92,13 +93,13 @@ int main(void)
 		return 1;
 	}
 
-	const int MAGIC_NUMBER = 6174;
-	int number = INPUT_NUMBER;
+	const int32_t MAGIC_NUMBER = 6174;
+	int32_t number = INPUT_NUMBER;
 
 	while (number != MAGIC_NUMBER)
 	{
-		int sorted = sort_digits(number);
-		int reversed = reverse_digits(sorted);
+		int32_t sorted = sort_digits(number);
+		int32_t reversed = reverse_digits(sorted);
 		number = reversed - sorted;
 		printf("number: %d\n", number);
 	}
