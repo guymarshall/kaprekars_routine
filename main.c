@@ -1,6 +1,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
+
+bool contains_zero(int32_t input)
+{
+	while (input > 0)
+	{
+		if (input % 10 == 0)
+		{
+			return true;
+		}
+		input /= 10;
+	}
+
+	return false;
+}
 
 int32_t digit_count(int32_t input)
 {
@@ -15,8 +30,9 @@ int32_t digit_count(int32_t input)
 	return count;
 }
 
-#define INPUT_NUMBER 9218
-#define DIGIT_COUNT digit_count(INPUT_NUMBER)
+// #define INPUT_NUMBER 9218
+// #define DIGIT_COUNT digit_count(INPUT_NUMBER)
+#define DIGIT_COUNT 4
 
 int32_t all_digits_same(int32_t input)
 {
@@ -84,23 +100,30 @@ int32_t sort_digits(int32_t input)
 
 int main(void)
 {
-	if (all_digits_same(INPUT_NUMBER))
+	for (uint32_t i = 1000; i < 9999; i++)
 	{
-		fprintf(stderr, "Digits cannot all be the same.\n");
+		if (contains_zero(i))
+		{
+			continue;
+		}
 
-		return 1;
-	}
+		if (all_digits_same(i))
+		{
+			continue;
+		}
 
-	const int32_t MAGIC_NUMBER = 6174;
-	int32_t number = INPUT_NUMBER;
+		//! if the number contains 0 at the end, it becomes a 3-digit number!
 
-	printf("number: %d\n", number);
-	while (number != MAGIC_NUMBER)
-	{
-		int32_t sorted = sort_digits(number);
-		int32_t reversed = reverse_digits(sorted);
-		number = reversed - sorted;
-		printf("number: %d\n", number);
+		const int32_t MAGIC_NUMBER = 6174;
+
+		printf("i: %d\n", i);
+		while (i != MAGIC_NUMBER)
+		{
+			int32_t sorted = sort_digits(i);
+			int32_t reversed = reverse_digits(sorted);
+			i = reversed - sorted;
+			printf("i: %d\n", i);
+		}
 	}
 
 	return 0;
